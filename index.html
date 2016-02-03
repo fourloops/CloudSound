@@ -2,17 +2,20 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>initrequest</title>
+        <title>Index</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="style.css" charset="utf-8">
     </head>
     <body>
+        <div id="map"></div>
         <button id="back" type="button" name="button">BACK</button>
         <button id="pause" type="button" name="button">PAUSE</button>
         <button id="resume" type="button" name="button">RESUME</button>
         <button id="next" type="button" name="button">NEXT</button>
         <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
         <script src="secretKeys.js"></script>
+        <script src="script.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=" + secretKeys.google + "&signed_in=true&callback=initMap" async defer></script>
         <script src="cloudsound.js"></script>
-
-
     </body>
 </html>
