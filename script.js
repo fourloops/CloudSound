@@ -2,9 +2,12 @@
 
 var currentLocation;
 var marker;
-var apiResult;
 var weatherResult;
 var day;
+
+var googleScript = document.createElement('script');
+googleScript.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=' + secretKeys.google + '&signed_in=true&callback=initMap');
+document.body.appendChild(googleScript);
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -15,10 +18,11 @@ function initMap() {
   map.addListener('click', function(e) {
     placeMarkerAndPanTo(e.latLng, map);
     currentLocation = {
-        lat: 'lat=' + e.latLng.lat(),
-        lng: '&lon=' + e.latLng.lng()
+        lat: '' + e.latLng.lat(),
+        lng: '' + e.latLng.lng()
     }
   });
+}
 
 function placeMarkerAndPanTo(latLng, map) {
     if(marker) marker.setMap(null);
@@ -39,6 +43,7 @@ function weather() {
     xhr.send();
     return JSON.parse(xhr.responseText);
 }
+
 function getWeather(id){
     if(id<233 || (id<782 && id>623) || id>=956){return "extreme";}
     else if(id<533){return "rain";}
@@ -46,12 +51,13 @@ function getWeather(id){
     else if(id<802 || (id>950 && id<956)){return "clear sky";}
     else{return "cloudy sky";}
 }
+
 function getTime(sunrise, sunset){
     return Date.now()>sunrise && Date.now()<sunset ? true : false;
 }
 
 function changeLocation(){
-    apiResult = weather().weather[0].id;
+    var apiResult = weather().weather[0].id;
     weatherResult = getWeather(apiResult);
     day = Date.now() > weather().sys.sunrise && Date.now() < weather().sys.sunset ? true : false;
 }
