@@ -44,19 +44,13 @@ function getTracks(weather){
 var counter = 0;
 // WARNING needs to run based on weather result!!
 function stream(songObj){
-
     song.innerHTML = "";
 
     var songLink = document.createElement("a");
     songLink.innerHTML = songObj.title;
     songLink.href = songObj.permalink_url;
 
-    var artistLink = document.createElement("a");
-    artistLink.innerHTML = songObj.user.username;
-    artistLink.href = songObj.user.permalink_url;
-
     song.appendChild(songLink);
-    song.appendChild(artistLink);
 
     var trackId = songObj.id;
     var trackUrl = '/tracks/'+trackId;
@@ -78,4 +72,11 @@ function stream(songObj){
             nextTrack();
         });
     });
+}
+
+function cloudSound(weatherResult){
+    getTracks(weatherResult);
+    setTimeout (function(){
+        stream(allTracks[0])
+    }, 1000);
 }
