@@ -56,6 +56,7 @@ function weather(){
             day = Date.now()/1000 > response.sys.sunrise && Date.now()/1000 < response.sys.sunset ? true : false;
             weatherResult = getWeather(response.weather[0].id);
             updateInfo();
+            cloudSound(weatherResult);
             setTimeout(toggleMap, 1500);
         }
     };
