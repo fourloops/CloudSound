@@ -70,26 +70,27 @@ body {
     -webkit-filter: opacity(0);
     filter: opacity(0);
     color: black;
-    webkit-transition: opacity 2s linear;
-    transition: opacity 2s linear;
+    webkit-transition: .7s linear;
+    transition: .7s linear;
+    text-align: center;
 }
 
 .infoShow {
-    transition: opacity 2s linear;
-    webkit-transition: opacity 2s linear;
-
-    -webkit-filter: opacity(.5);
-    filter: opacity(.5);
+    -webkit-filter: opacity(.7);
+    filter: opacity(.7);
 
 }
 
-.infoShow:hover {
-    transition: opacity 2s linear;
-    webkit-transition: opacity 2s linear;
+.weatherInfo {
+    /*padding: 1%;*/
+    font-family: sans-serif;
+    font-size: 2em;
+}
 
-    -webkit-filter: opacity(1);
-    filter: opacity(1);
-
+#area {
+    padding-top: 1em;
+    font-size: 2.5em;
+    font-weight: bold;
 }
 
 #buttonDiv {
