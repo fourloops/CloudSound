@@ -14,6 +14,29 @@ body {
     background-size: 100% 100%;
 }
 
+.fourloops {
+    background-color: black;
+    color: white;
+    width: 65em;
+    height: 30em;
+    border-radius: 5em;
+    -webkit-filter: opacity(.6);
+    filter: opacity(.6);
+    position: fixed;
+    top: -60%;
+    right: 70%;
+}
+
+.fourloops p{
+    position: absolute;
+    bottom: 0;
+    right: 4%;
+    font-size: 1.6em;
+    font-family: sans-serif;
+    -webkit-filter: opacity(1);
+    filter: opacity(1);
+}
+
 #map {
     height: 100%;
     width: 100%;
@@ -29,8 +52,8 @@ body {
     display: block;
     margin: 0 auto;
     margin-top: 10%;
-    webkit-transition: margin-top 1s;
-    transition: margin-top 1s;
+    webkit-transition: margin-top .7s;
+    transition: margin-top .7s;
     z-index: 3;
 }
 
@@ -56,6 +79,15 @@ body {
     filter: opacity(0.6);
 }
 
+.button:focus {
+    outline:0;
+}
+
+.button:hover {
+    -webkit-filter: opacity(0.8);
+    filter: opacity(0.8);
+}
+
 .hideButton {
     position: absolute;
     top: 64%;
@@ -63,18 +95,18 @@ body {
     width: 8em;
     height: 2em;
     z-index: 1;
-    webkit-transition: top 1s;
-    transition: top 1s;
+    webkit-transition: top .7s;
+    transition: top .7s;
 }
 
 .hidden{
     top: -1.4em;
-    webkit-transition: top 1s;
-    transition: top 1s;
+    webkit-transition: top .7s;
+    transition: top .7s;
 }
 
 .maphide{
     margin-top: -27%;
-    webkit-transition: margin-top 1s;
-    transition: margin-top 1s;
+    webkit-transition: margin-top .7s;
+    transition: margin-top .7s;
 }

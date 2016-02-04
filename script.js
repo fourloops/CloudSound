@@ -2,6 +2,7 @@
 // ------ Declares variables & creates google api script with secret key
 var currentLocation,
     marker,
+    hidden = false,
     weatherResult,
     day,
     response;
@@ -18,7 +19,8 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
         center: {lat: 51.5072, lng: 0.1275 },
-        mapTypeId: google.maps.MapTypeId.HYBRID
+        mapTypeId: google.maps.MapTypeId.HYBRID,
+        draggableCursor:'crosshair'
     });
 
     map.addListener('click', function(e) {
@@ -68,18 +70,20 @@ function getWeather(id){
     else if(id<802 || (id>950 && id<956)){return "clear sky";}
     else{return "cloudy sky";}
 }
-var hidden = 0;
-document.getElementsByClassName("hideButton")[0].addEventListener("click", function(){
-    if(hidden===0){
+
+document.getElementsByClassName("hideButton")[0].addEventListener("click", toggleMap);
+
+function toggleMap(){
+    if(!hidden){
         document.getElementsByClassName("map1")[0].classList.add("maphide");
         document.getElementsByClassName("hideButton")[0].classList.add("hidden");
         document.getElementsByClassName("hideButton")[0].innerHTML="SHOW MAP";
-        hidden++;
+        hidden = true;
     }
     else{
         document.getElementsByClassName("map1")[0].classList.remove("maphide");
         document.getElementsByClassName("hideButton")[0].classList.remove("hidden");
         document.getElementsByClassName("hideButton")[0].innerHTML="HIDE MAP";
-        hidden--;
+        hidden = false;
     }
-});
+};
