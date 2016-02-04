@@ -109,6 +109,6 @@ function toggleMap(){
 
 function updateInfo(){
     document.getElementById('area').innerHTML = response.name + ', <em>' + response.sys.country + '<em>';
-    document.getElementById('temp').innerHTML = "Temperature: " + (Math.floor(response.main.temp - 273.15)) + '&#8451';
-    document.getElementById('condition').innerHTML = "Current Weather: " + response.weather[0].description;
+    document.getElementById('temp').innerHTML = "Temperature: <b>" + (Math.floor(response.main.temp - 273.15)) + '&#8451</b>';
+    document.getElementById('condition').innerHTML = "Current Weather:<b> " + response.weather[0].description + '</b>';
 }
