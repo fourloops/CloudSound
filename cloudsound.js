@@ -4,6 +4,7 @@ var pause  = document.getElementById("pause");
 var resume = document.getElementById("resume");
 var next   = document.getElementById("next");
 var world  = document.getElementById("world");
+var song = document.getElementById("currentSong");
 
 // event listeners
 var weatherQuery = {
@@ -33,7 +34,7 @@ function getTracks(weather){
         }).then(function(tracks){
                     // pushh all tracks to allTracks
             for(j=0;j<tracks.length;j++){
-                allTracks.push(tracks[i]);
+                allTracks.push(tracks[j]);
             }
         });
     }
@@ -43,6 +44,20 @@ function getTracks(weather){
 var counter = 0;
 // WARNING needs to run based on weather result!!
 function stream(songObj){
+
+    song.innerHTML = "";
+
+    var songLink = document.createElement("a");
+    songLink.innerHTML = songObj.title;
+    songLink.href = songObj.permalink_url;
+
+    var artistLink = document.createElement("a");
+    artistLink.innerHTML = songObj.user.username;
+    artistLink.href = songObj.user.permalink_url;
+
+    song.appendChild(songLink);
+    song.appendChild(artistLink);
+
     var trackId = songObj.id;
     var trackUrl = '/tracks/'+trackId;
     SC.stream(trackUrl).then(function(player){
