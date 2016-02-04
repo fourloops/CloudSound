@@ -28,6 +28,7 @@ function initMap() {
             lat: '' + e.latLng.lat(),
             lng: '' + e.latLng.lng()
         };
+        console.log(e.rawOffset);
         weather();
     });
 }
@@ -54,6 +55,7 @@ function weather(){
             response = JSON.parse(xhr.responseText);
             day = Date.now()/1000 > response.sys.sunrise && Date.now()/1000 < response.sys.sunset ? true : false;
             weatherResult = getWeather(response.weather[0].id);
+            // updateInfo();
         }
     };
     xhr.open("GET", url);
@@ -92,12 +94,18 @@ function toggleMap(){
         document.getElementsByClassName("map1")[0].classList.add("maphide");
         document.getElementsByClassName("hideButton")[0].classList.add("hidden");
         document.getElementsByClassName("hideButton")[0].innerHTML="SHOW MAP";
+        document.getElementsByClassName("info")[0].classList.add("infoShow");
         hidden = true;
     }
     else{
         document.getElementsByClassName("map1")[0].classList.remove("maphide");
         document.getElementsByClassName("hideButton")[0].classList.remove("hidden");
         document.getElementsByClassName("hideButton")[0].innerHTML="HIDE MAP";
+        document.getElementsByClassName("info")[0].classList.remove("infoShow");
         hidden = false;
     }
 }
+
+// updateInfo(){
+//
+// }
