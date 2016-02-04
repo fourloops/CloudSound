@@ -1,48 +1,63 @@
 // -------------- GOOGLE API -----------------
+// ------ Declares variables & creates google api script with secret key
+var currentLocation,
+    marker,
+    weatherResult,
+    day,
+    response;
+    googleScript = document.createElement('script');
 
-var currentLocation;
-var marker;
-var weatherResult;
-var day;
-
-var googleScript = document.createElement('script');
-googleScript.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=' + secretKeys.google + '&signed_in=true&callback=initMap');
+googleScript.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key='
++ secretKeys.google + '&signed_in=true&callback=initMap');
 document.body.appendChild(googleScript);
 
-function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
-    center: {lat: 51.5072, lng: 0.1275 }
-  });
+// ------ Creates map and adds click listener (initMap called by api script tag)
 
-  map.addListener('click', function(e) {
-    placeMarkerAndPanTo(e.latLng, map);
-    currentLocation = {
-        lat: '' + e.latLng.lat(),
-        lng: '' + e.latLng.lng()
-    }
-  });
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        center: {lat: 51.5072, lng: 0.1275 }
+    });
+
+    map.addListener('click', function(e) {
+        placeMarkerAndPanTo(e.latLng, map);
+        currentLocation = {
+            lat: '' + e.latLng.lat(),
+            lng: '' + e.latLng.lng()
+        }
+        weather();
+    });
 }
 
+//------ Places marker on map and pans to given latitude/longitude -------------
+
 function placeMarkerAndPanTo(latLng, map) {
-    if(marker) marker.setMap(null);
+    if(marker) { marker.setMap(null); }
     marker = new google.maps.Marker({
         position: latLng,
         map: map
-  });
-  map.panTo(latLng);
-
+    });
+    map.panTo(latLng);
 }
 
 // ------------ WEATHER API -----------------
+// ----- Creates new XMLHttpRequest, assigns returned JSON object to response---
 
-function weather() {
+function weather(){
     var xhr = new XMLHttpRequest(),
         url = "http://api.openweathermap.org/data/2.5/weather?lat=" + currentLocation.lat + '&lon=' +currentLocation.lng + "&appid=" +  secretKeys.weather;
-    xhr.open("GET",url,false);
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            response = JSON.parse(xhr.responseText);
+            weatherResult = getWeather(response.weather[0].id);
+            day = Date.now()/1000 > response.sys.sunrise && Date.now()/1000 < response.sys.sunset ? true : false;
+        }
+    };
+    xhr.open("GET", url);
     xhr.send();
-    return JSON.parse(xhr.responseText);
 }
+
+// ----- Translates returned weather ID to specific category --------
 
 function getWeather(id){
     if(id<233 || (id<782 && id>623) || id>=956){return "extreme";}
@@ -51,15 +66,3 @@ function getWeather(id){
     else if(id<802 || (id>950 && id<956)){return "clear sky";}
     else{return "cloudy sky";}
 }
-
-function getTime(sunrise, sunset){
-    return Date.now()>sunrise && Date.now()<sunset ? true : false;
-}
-
-function changeLocation(){
-    var apiResult = weather().weather[0].id;
-    weatherResult = getWeather(apiResult);
-    day = Date.now() > weather().sys.sunrise && Date.now() < weather().sys.sunset ? true : false;
-}
-
-// -------------- SOUNDCLOUD API -----------------
