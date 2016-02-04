@@ -63,19 +63,22 @@ body {
     height: 50%;
     width: 40%;
     border-radius: 10px;
-    /*display: block;*/
+    display: block;
     margin: 0 auto;
     margin-top: 10%;
-    /*visibility: hidden;*/
     background-color: white;
     -webkit-filter: opacity(0);
     filter: opacity(0);
     color: black;
+    webkit-transition: opacity .7s ease-in-out;
+    transition: opacity .7s ease-in-out;
 }
 
 .infoShow {
     -webkit-filter: opacity(.5);
     filter: opacity(.5);
+    webkit-transition: opacity .7s ease-in-out;
+    transition: opacity .7s ease-in-out;
 }
 
 #buttonDiv {
