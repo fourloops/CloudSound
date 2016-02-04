@@ -14,9 +14,11 @@ document.body.appendChild(googleScript);
 // ------ Creates map and adds click listener (initMap called by api script tag)
 
 function initMap() {
+
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
-        center: {lat: 51.5072, lng: 0.1275 }
+        center: {lat: 51.5072, lng: 0.1275 },
+        mapTypeId: google.maps.MapTypeId.HYBRID
     });
 
     map.addListener('click', function(e) {
