@@ -7,15 +7,11 @@ var world  = document.getElementById("world");
 
 // event listeners
 var weatherQuery = {
-    "clear sky": {tags:["sunny", "sun", "sunshine", "hot", "warm", "bright", "cloudless"]},
-    "few clouds":[""],
-    "scattered clouds":[],
-    "broken clouds":[],
-    "shower rain":[],
-    "rain":[],
-    "thunderstorm":[],
-    "snow":[],
-    "mist":[]
+    "clear sky":    {tags:["sunny", "sun","optimistic", "sunshine", "hot", "warm", "bright", "cloudless"]},
+    "cloudy sky":   {tags:["cloudy","clouds","melancholic","broody","cumulus","overcast"]},
+    "snow":         {tags:["white","christmas","snow","cold","frozen","freeze","snowflake"]},
+    "extreme":      {tags:["sandstorm","storm","hurricane","tornado","windy"]},
+    "rain":         {tags:["wet","sad","tears","breakup","heartbreak","rain","shower"]}
 };
 
 
@@ -25,12 +21,13 @@ SC.initialize({
   client_id: secretKeys.soundcloud || prompt("soundcloud user key please")
 });
 
+var allTracks;
+
 function getTracks(weather){
     var query     = weatherQuery[weather];
-    var allTracks = [];
+    allTracks = [];
     for (var i = 0; i<query.tags.length; i++) {
         var tag = query.tags[i];
-        console.log(tag);
         SC.get('/tracks',{
             q:  tag
         }).then(function(tracks){
@@ -43,21 +40,27 @@ function getTracks(weather){
     return allTracks;
 }
 
-
-
+var counter = 0;
 // WARNING needs to run based on weather result!!
-
-function play(songObj){
+function stream(songObj){
     var trackId = songObj.id;
     var trackUrl = '/tracks/'+trackId;
-    console.log(trackUrl);
     SC.stream(trackUrl).then(function(player){
-      player.play();
+        player.play();
+        pause.addEventListener('click',function(){
+            player.pause();
+        });
+        resume.addEventListener('click',function(){
+            player.play();
+        });
+        function nextTrack(){
+            counter++;
+            stream(allTracks[counter]);
+        }
+        next.addEventListener('click',function(){
+            console.log(songObj.duration);
+            player.seek(songObj.duration);
+            nextTrack();
+        });
     });
-
-    // SC.stream(trackUrl, function(sound) {
-    //     SC.sound = sound;
-    // });
-    // SC.sound.play();
-
 }
