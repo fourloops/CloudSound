@@ -9,9 +9,11 @@ html, body {
 }
 
 body {
-    background-image: url(http://wearechange.org/wp-content/uploads/2015/03/1_See_It.jpg);
+    background-image: url(assets/default.jpg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    webkit-transition: background-image 1.5s;
+    transition: background-image 1.5s;
 }
 
 .fourloops {
@@ -55,6 +57,25 @@ body {
     webkit-transition: margin-top .7s;
     transition: margin-top .7s;
     z-index: 3;
+}
+
+.info {
+    height: 50%;
+    width: 40%;
+    border-radius: 10px;
+    /*display: block;*/
+    margin: 0 auto;
+    margin-top: 10%;
+    /*visibility: hidden;*/
+    background-color: white;
+    -webkit-filter: opacity(0);
+    filter: opacity(0);
+    color: black;
+}
+
+.infoShow {
+    -webkit-filter: opacity(.5);
+    filter: opacity(.5);
 }
 
 #buttonDiv {
