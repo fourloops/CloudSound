@@ -1,13 +1,45 @@
+/** {
+    border: 1px solid red;
+}*/
 
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
+
+body {
+    background-image: url(http://wearechange.org/wp-content/uploads/2015/03/1_See_It.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
 #map {
     height: 50%;
     width: 40%;
     display: block;
     margin: 0 auto;
-    margin-top: 15%;
+    margin-top: 10%;
+    border-radius: 10px;
+    -webkit-filter: brightness(90%);
+    filter: brightness(90%);
+}
+
+#buttonDiv {
+    width: 46%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 4%;
+}
+
+.button {
+    margin: 2%;
+    font-size: 1.5em;
+    background-color: white;
+    height: 3em;
+    width: 5em;
+    border-radius: 10px;
+    border: none;
+    -webkit-filter: opacity(0.6);
+    filter: opacity(0.6);
 }
