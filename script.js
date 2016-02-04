@@ -55,7 +55,8 @@ function weather(){
             response = JSON.parse(xhr.responseText);
             day = Date.now()/1000 > response.sys.sunrise && Date.now()/1000 < response.sys.sunset ? true : false;
             weatherResult = getWeather(response.weather[0].id);
-            // updateInfo();
+            updateInfo();
+            setTimeout(toggleMap, 1500);
         }
     };
     xhr.open("GET", url);
@@ -106,6 +107,8 @@ function toggleMap(){
     }
 }
 
-// updateInfo(){
-//
-// }
+function updateInfo(){
+    document.getElementById('area').innerHTML = response.name + ', <em>' + response.sys.country + '<em>';
+    document.getElementById('temp').innerHTML = "Temperature: " + (Math.floor(response.main.temp - 273.15)) + '&#8451';
+    document.getElementById('condition').innerHTML = "Current Weather: " + response.weather[0].description;
+}
