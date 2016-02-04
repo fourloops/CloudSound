@@ -71,13 +71,13 @@ function getWeather(id){
 var hidden = 0;
 document.getElementsByClassName("hideButton")[0].addEventListener("click", function(){
     if(hidden===0){
-        document.getElementById("map").classList.add("maphide");
+        document.getElementsByClassName("map1")[0].classList.add("maphide");
         document.getElementsByClassName("hideButton")[0].classList.add("hidden");
         document.getElementsByClassName("hideButton")[0].innerHTML="SHOW MAP";
         hidden++;
     }
     else{
-        document.getElementById("map").classList.remove("maphide");
+        document.getElementsByClassName("map1")[0].classList.remove("maphide");
         document.getElementsByClassName("hideButton")[0].classList.remove("hidden");
         document.getElementsByClassName("hideButton")[0].innerHTML="HIDE MAP";
         hidden--;

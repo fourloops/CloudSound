@@ -15,15 +15,23 @@ body {
 }
 
 #map {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    -webkit-filter: brightness(90%);
+    filter: brightness(90%);
+    z-index: 2;
+}
+
+.map1 {
     height: 50%;
     width: 40%;
     display: block;
     margin: 0 auto;
     margin-top: 10%;
-    border-radius: 10px;
-    -webkit-filter: brightness(90%);
-    filter: brightness(90%);
-    z-index: 2;
+    webkit-transition: margin-top 1s;
+    transition: margin-top 1s;
+    z-index: 3;
 }
 
 #buttonDiv {
@@ -31,6 +39,9 @@ body {
     display: block;
     margin: 0 auto;
     margin-top: 4%;
+    position: absolute;
+    top: 70%;
+    left: 27.5%;
 }
 
 .button {
@@ -63,6 +74,7 @@ body {
 }
 
 .maphide{
-    position: absolute;
-    top: -70%;
+    margin-top: -27%;
+    webkit-transition: margin-top 1s;
+    transition: margin-top 1s;
 }
