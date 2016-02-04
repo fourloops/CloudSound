@@ -19,20 +19,20 @@ body {
 .fourloops {
     background-color: black;
     color: white;
-    width: 65em;
-    height: 30em;
-    border-radius: 5em;
+    width: 25em;
+    height: 5em;
+    border-radius: 0 0 5em 0;
     -webkit-filter: opacity(.6);
     filter: opacity(.6);
     position: fixed;
-    top: -60%;
-    right: 70%;
+    top: 0;
+    left: 0;
 }
 
 .fourloops p{
     position: absolute;
     bottom: 0;
-    right: 4%;
+    right: 13%;
     font-size: 1.6em;
     font-family: sans-serif;
     -webkit-filter: opacity(1);
@@ -82,13 +82,14 @@ body {
 }
 
 .weatherInfo {
-    /*padding: 1%;*/
+    padding: 0;
+    margin: .5em;
     font-family: sans-serif;
     font-size: 2em;
 }
 
 #area {
-    padding-top: 1em;
+    padding-top: .7em;
     font-size: 2.5em;
     font-weight: bold;
 }
