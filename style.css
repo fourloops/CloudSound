@@ -23,6 +23,7 @@ body {
     border-radius: 10px;
     -webkit-filter: brightness(90%);
     filter: brightness(90%);
+    z-index: 2;
 }
 
 #buttonDiv {
@@ -42,4 +43,26 @@ body {
     border: none;
     -webkit-filter: opacity(0.6);
     filter: opacity(0.6);
+}
+
+.hideButton {
+    position: absolute;
+    top: 64%;
+    left: 40%;
+    width: 8em;
+    height: 2em;
+    z-index: 1;
+    webkit-transition: top 1s;
+    transition: top 1s;
+}
+
+.hidden{
+    top: -1.4em;
+    webkit-transition: top 1s;
+    transition: top 1s;
+}
+
+.maphide{
+    position: absolute;
+    top: -70%;
 }
