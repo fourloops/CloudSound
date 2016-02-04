@@ -8,8 +8,7 @@ var currentLocation,
     response;
     googleScript = document.createElement('script');
 
-googleScript.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key='
-+ secretKeys.google + '&signed_in=true&callback=initMap');
+googleScript.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=' + secretKeys.google + '&signed_in=true&callback=initMap');
 document.body.appendChild(googleScript);
 
 // ------ Creates map and adds click listener (initMap called by api script tag)
@@ -28,7 +27,7 @@ function initMap() {
         currentLocation = {
             lat: '' + e.latLng.lat(),
             lng: '' + e.latLng.lng()
-        }
+        };
         weather();
     });
 }
@@ -53,8 +52,8 @@ function weather(){
     xhr.onreadystatechange = function() {
         if(xhr.readyState == 4 && xhr.status == 200) {
             response = JSON.parse(xhr.responseText);
-            weatherResult = getWeather(response.weather[0].id);
             day = Date.now()/1000 > response.sys.sunrise && Date.now()/1000 < response.sys.sunset ? true : false;
+            weatherResult = getWeather(response.weather[0].id);
         }
     };
     xhr.open("GET", url);
@@ -64,11 +63,26 @@ function weather(){
 // ----- Translates returned weather ID to specific category --------
 
 function getWeather(id){
-    if(id<233 || (id<782 && id>623) || id>=956){return "extreme";}
-    else if(id<533){return "rain";}
-    else if(id<623){return "snow";}
-    else if(id<802 || (id>950 && id<956)){return "clear sky";}
-    else{return "cloudy sky";}
+    if(id<233 || (id<782 && id>623) || id>=956){
+        document.body.style.backgroundImage = day ? "url(assets/extremeDay.jpg)" : "url(assets/extremeNight.jpg)";
+        return "extreme";
+    }
+    else if(id<533){
+        document.body.style.backgroundImage = day ? "url(assets/rainDay.jpg)" : "url(assets/rainNight.jpg)";
+        return "rain";
+    }
+    else if(id<623){
+        document.body.style.backgroundImage = day ? "url(assets/snowDay.jpg)" : "url(assets/snowNight.jpg)";
+        return "snow";
+    }
+    else if(id<802 || (id>950 && id<956)){
+        document.body.style.backgroundImage = day ? "url(assets/clearSkyDay.jpg)" : "url(assets/clearSkyNight.jpeg)";
+        return "clear sky";
+    }
+    else{
+        document.body.style.backgroundImage = day ? "url(assets/cloudySkyDay.jpg)" : "url(assets/cloudySkyNight.jpg)";
+        return "cloudy sky";
+    }
 }
 
 document.getElementsByClassName("hideButton")[0].addEventListener("click", toggleMap);
@@ -86,4 +100,4 @@ function toggleMap(){
         document.getElementsByClassName("hideButton")[0].innerHTML="HIDE MAP";
         hidden = false;
     }
-};
+}
