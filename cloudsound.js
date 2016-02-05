@@ -20,7 +20,7 @@ SC.initialize({
   client_id: secretKeys.soundcloud || prompt("soundcloud user key please")
 });
 
-var allTracks,counter=0;
+var allTracks;
 
 function getTracks(weather){
     var query     = weatherQuery[weather];
@@ -39,13 +39,13 @@ function getTracks(weather){
     return allTracks;
 }
 
-function stream(songObj){
+function stream(songObj,counter){
     song.innerHTML = "";
 
-    var songLink = document.createElement("a");
-    songLink.innerHTML = songObj.title;
-    songLink.href   = songObj.permalink_url;
-    songLink.target = "_blank";
+    var songLink        = document.createElement("a");
+    songLink.innerHTML  = songObj.title;
+    songLink.href       = songObj.permalink_url;
+    songLink.target     = "_blank";
     song.appendChild(songLink);
 
     var trackId = songObj.id;
@@ -57,7 +57,7 @@ function stream(songObj){
             pause.classList.remove("paused");
             resume.classList.add("paused");
         }
-        setTimeout(play(),200);
+        setTimeout( play(),200 );
         console.log(songObj.id);
         pause.addEventListener('click',function(){
             player.pause();
@@ -69,18 +69,17 @@ function stream(songObj){
         });
         function nextTrack(){
             if(counter < allTracks.length){
-                console.log(counter+"n.1");
-                counter++;
+                counter++
                 stream(allTracks[counter]);
+                console.log(counter+"n.1");
             }
         }
         function prevTrack(){
             if(counter > 0){
-                console.log(counter+"n.1");
                 counter--;
                 stream(allTracks[counter]);
+                console.log(counter+"n.1");
             }
-            console.log(counter+"n.2");
         }
         next.addEventListener('click',function(){
             nextTrack();
@@ -93,9 +92,8 @@ function stream(songObj){
 }
 
 function cloudSound(weatherResult){
-    counter = 0;
     getTracks(weatherResult);
     setTimeout (function(){
-        stream(allTracks[0]);
+        stream(allTracks[0],0);
     }, 200);
 }
