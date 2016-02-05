@@ -33,6 +33,7 @@ body {
     /*position: absolute;*/
     bottom: 0;
     right: 13%;
+    padding-left: 4%;
     font-size: 1.6em;
     font-family: sans-serif;
     -webkit-filter: opacity(1);
