@@ -53,11 +53,11 @@ function weather(){
     xhr.onreadystatechange = function() {
         if(xhr.readyState == 4 && xhr.status == 200) {
             response = JSON.parse(xhr.responseText);
-            day = Date.now()/1000 > response.sys.sunrise && Date.now()/1000 < response.sys.sunset ? true : false;
+            day = Date.now()/1000 > response.sys.sunrise && Date.now()/1000 < response.sys.sunset ? 'day' : 'night';
             weatherResult = getWeather(response.weather[0].id);
             updateInfo();
             setTimeout(cloudSound(weatherResult),500);
-            setTimeout(toggleMap,1500);
+            setTimeout(toggleMap,1000);
         }
     };
     xhr.open("GET", url);
@@ -68,23 +68,23 @@ function weather(){
 
 function getWeather(id){
     if(id<233 || (id<782 && id>623) || id>=956){
-        document.body.style.backgroundImage = day ? "url(assets/extremeDay.jpg)" : "url(assets/extremeNight.jpg)";
+        document.body.style.backgroundImage = day === 'day' ? "url(assets/extremeDay.jpg)" : "url(assets/extremeNight.jpg)";
         return "extreme";
     }
     else if(id<533){
-        document.body.style.backgroundImage = day ? "url(assets/rainDay.jpg)" : "url(assets/rainNight.jpg)";
+        document.body.style.backgroundImage = day === 'day' ? "url(assets/rainDay.jpg)" : "url(assets/rainNight.jpg)";
         return "rain";
     }
     else if(id<623){
-        document.body.style.backgroundImage = day ? "url(assets/snowDay.jpg)" : "url(assets/snowNight.jpg)";
+        document.body.style.backgroundImage = day === 'day' ? "url(assets/snowDay.jpg)" : "url(assets/snowNight.jpg)";
         return "snow";
     }
     else if(id<802 || (id>950 && id<956)){
-        document.body.style.backgroundImage = day ? "url(assets/clearSkyDay.jpg)" : "url(assets/clearSkyNight.jpeg)";
+        document.body.style.backgroundImage = day === 'day' ? "url(assets/clearSkyDay.jpg)" : "url(assets/clearSkyNight.jpeg)";
         return "clear sky";
     }
     else{
-        document.body.style.backgroundImage = day ? "url(assets/cloudySkyDay.jpg)" : "url(assets/cloudySkyNight.jpg)";
+        document.body.style.backgroundImage = day === 'day' ? "url(assets/cloudySkyDay.jpg)" : "url(assets/cloudySkyNight.jpg)";
         return "cloudy sky";
     }
 }
@@ -111,5 +111,5 @@ function toggleMap(){
 function updateInfo(){
     document.getElementById('area').innerHTML = response.name + ', <em>' + response.sys.country + '<em>';
     document.getElementById('temp').innerHTML = "Temperature: <b>" + (Math.floor(response.main.temp - 273.15)) + '&#8451</b>';
-    document.getElementById('condition').innerHTML = "Current Weather:<b> " + response.weather[0].description + '</b>';
+    document.getElementById('condition').innerHTML = "Weather:<b> " + day + ', ' + response.weather[0].description + '</b>';
 }
