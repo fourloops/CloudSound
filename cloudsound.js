@@ -7,11 +7,11 @@ var song = document.getElementById("currentSong");
 
 // event listeners
 var weatherQuery = {
-    "clear sky":    {tags:["sunny", "sun","optimistic", "sunshine", "hot", "warm", "bright", "cloudless"]},
-    "cloudy sky":   {tags:["cloudy","clouds","melancholic","broody","cumulus","overcast"]},
-    "snow":         {tags:["white","christmas","snow","cold","frozen","freeze","snowflake"]},
-    "extreme":      {tags:["sandstorm","storm","hurricane","tornado","windy"]},
-    "rain":         {tags:["wet","sad","tears","breakup","heartbreak","rain","shower"]}
+    "clear sky":    {tags:["sunny", "sun", "optimistic", "sunshine", "hot", "warm", "bright", "cloudless", "positive", "flying", "upbeat"]},
+    "cloudy sky":   {tags:["cloudy", "clouds", "melancholic", "broody", "grey", "overcast", "threatening", "menacing", "depressed", "uncertain", "nostalgic"]},
+    "snow":         {tags:["white", "christmas", "snow", "cold", "frozen", "freeze", "snowflake", "dreamy", "atmospheric", "reflective", "playful"]},
+    "extreme":      {tags:["sandstorm", "storm", "hurricane", "tornado", "windy", "anger", "fury", "shithappens"]},
+    "rain":         {tags:["wet", "sad", "tears", "breakup", "heartbreak", "rain", "shower", "cry", "crying", "lonely"]}
 };
 
 //search tags
@@ -31,13 +31,33 @@ function getTracks(weather){
         }).then(function(tracks){
             // pushh all tracks to allTracks
             for(j=0;j<tracks.length;j++){
-                if(tracks[j].original_content_size < 3500000){
+                if( tracks[j].original_format === 'mp3'){
                     allTracks.push(tracks[j]);
                 }
             }
         });
     }
-    return allTracks;
+    shuffle(allTracks);
+    console.log('shuffled');
+}
+
+function shuffle(array) {
+  var currentIndex = array.length;
+
+  // While there remain elements to shuffle...
+  while (currentIndex !== 0) {
+
+    // Pick a remaining element...
+    var randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex --;
+
+    // And swap it with the current element.
+    var temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }
 
 function stream(songObj,counter){
@@ -54,12 +74,14 @@ function stream(songObj,counter){
 
     SC.stream(trackUrl).then(function(player){
         function play(){
-            player.play();
+            setTimeout(function(){
+                player.play();
+            },500);
             pause.classList.remove("paused");
             resume.classList.add("paused");
         }
         player.seek(0);
-        setTimeout( play(),500 );
+        play();
         console.log(songObj.id);
         pause.addEventListener('click',function(){
             player.pause();
@@ -72,8 +94,10 @@ function stream(songObj,counter){
         function changeSong(){
             player.pause();
             player.seek(songObj.duration);
-            stream(allTracks[counter]);
-            console.log(counter+"n.1");
+            setTimeout(function(){
+                stream(allTracks[counter]);
+                console.log(counter+"n.1");
+            },500);
         }
 
         function nextTrack(){
