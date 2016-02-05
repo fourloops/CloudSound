@@ -25,4 +25,4 @@ This will then be sent to Open Weather Map which will send back the weather id. 
 
 The id will be linked to a number of tags which will then be sent to Soundcloud which will send us a track based on the sent tags.
 ![wireframe](assets/wireframe.jpg)
-![wireframe1](assets/wireframe1.jpg)
+<img src="assets/wireframe1.jpg"alt="wireframe1" height=1000/>
