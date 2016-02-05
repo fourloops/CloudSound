@@ -122,7 +122,7 @@ button:active {
     font-size: 1.5em;
     background-color: white;
     height: 3em;
-    width: 5em;
+    width: 6em;
     border-radius: 10px;
     border: none;
     -webkit-filter: opacity(0.6);
@@ -170,7 +170,7 @@ button:active {
         }
         .button {
             width: 25vw;
-            height: 14vw
+            height: 16vw
         }
         .hideButton {
             width: 50vw;
