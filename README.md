@@ -2,11 +2,16 @@
 
 ## What?
 
-MeteoSound is a mobile first website that offers a playlist for you depending on the weather in your chosen location
+Pathetic fallacy... 
+
+>...is a literary device wherein the author attributes human emotions and traits to nature or inanimate objects. For example, the following descriptions refer to weather and how it affects the mood, which can add atmosphere to a story: smiling skies, somber clouds, angry storm, or bitter winter.
+
+We want give the user a cathartic synergy of weather and emotion through CloudSound - a mobile-first website that gives you a weather-based playlist for the location you choose.
 
 ## Why?
 
-There doesn't seem to currently be anything offering this capability and it could be a useful tool for getting you in the right mood for what's going on outside
+We believe in the importance
+There doesn't seem to currently be anything offering this capability and it could be a useful tool for getting you in the right mood for what's going on outside.
 
 ## How?
 
