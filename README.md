@@ -4,7 +4,7 @@
 
 Pathetic fallacy... 
 
->...is a literary device wherein the author attributes human emotions and traits to nature or inanimate objects. For example, the following descriptions refer to weather and how it affects the mood, which can add atmosphere to a story: smiling skies, somber clouds, angry storm, or bitter winter.
+>...is a literary device referring to weather and how it affects the mood and how it can add atmosphere to a story: smiling skies, somber clouds, angry storm, or bitter winter.
 
 We want give the user a cathartic synergy of weather and emotion through CloudSound - a mobile-first website that gives you a weather-based playlist for the location you choose.
 
