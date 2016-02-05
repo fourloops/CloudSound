@@ -114,7 +114,7 @@ button.paused {
     display:none;
 }
 button:active {
-    background-color: green;
+    background-color: darkgrey;
 }
 
 .button {

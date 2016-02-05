@@ -3,7 +3,6 @@ var back   = document.getElementById("back");
 var pause  = document.getElementById("pause");
 var resume = document.getElementById("resume");
 var next   = document.getElementById("next");
-var world  = document.getElementById("world");
 var song = document.getElementById("currentSong");
 
 // event listeners
@@ -32,7 +31,9 @@ function getTracks(weather){
         }).then(function(tracks){
             // pushh all tracks to allTracks
             for(j=0;j<tracks.length;j++){
-                allTracks.push(tracks[j]);
+                if(tracks[j].original_content_size < 3500000){
+                    allTracks.push(tracks[j]);
+                }
             }
         });
     }
@@ -57,7 +58,8 @@ function stream(songObj,counter){
             pause.classList.remove("paused");
             resume.classList.add("paused");
         }
-        setTimeout( play(),200 );
+        player.seek(0);
+        setTimeout( play(),500 );
         console.log(songObj.id);
         pause.addEventListener('click',function(){
             player.pause();
@@ -67,18 +69,23 @@ function stream(songObj,counter){
         resume.addEventListener('click',function(){
             play();
         });
+        function changeSong(){
+            player.pause();
+            player.seek(songObj.duration);
+            stream(allTracks[counter]);
+            console.log(counter+"n.1");
+        }
+
         function nextTrack(){
             if(counter < allTracks.length){
                 counter++
-                stream(allTracks[counter]);
-                console.log(counter+"n.1");
+                changeSong();
             }
         }
         function prevTrack(){
             if(counter > 0){
                 counter--;
-                stream(allTracks[counter]);
-                console.log(counter+"n.1");
+                changeSong();
             }
         }
         next.addEventListener('click',function(){
@@ -95,5 +102,5 @@ function cloudSound(weatherResult){
     getTracks(weatherResult);
     setTimeout (function(){
         stream(allTracks[0],0);
-    }, 200);
+    }, 1000);
 }
