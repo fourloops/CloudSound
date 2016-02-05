@@ -50,24 +50,21 @@ function weather(){
     var xhr = new XMLHttpRequest(),
         url = "http://api.openweathermap.org/data/2.5/weather?lat=" + currentLocation.lat + '&lon=' +currentLocation.lng + "&appid=" +  secretKeys.weather;
     //
-    xhr.onreadystatechange = function() {
-        //if it returns successfully...
-        if(xhr.readyState == 4 && xhr.status == 200) {
-            //defines the json object
-            response = JSON.parse(xhr.responseText);
-            //if date.now is between sunrise and sunset (daytime) in local lat, long assign day as 'day' else 'night'
-            day = Date.now()/1000 > response.sys.sunrise && Date.now()/1000 < response.sys.sunset ? 'day' : 'night';
-            //extracts weather id from response object and parsing it using the getWeather function below
-            weatherResult = getWeather(response.weather[0].id);
-            //Updates the info div with location, temperature and weather
-            updateInfo();
-            //Calls cloudSound function passing it with the weather result variable eg. "rain", waiting half a second
-            //to ensure asynchronous SoundCloud API runs at the right time
-            setTimeout(cloudSound(weatherResult),500);
-            //Toggle map function hides the map and shows info div, occurring after 1 second
-            setTimeout(toggleMap,1000);
-        }
-    };
+    xhr.addEventListener("load",function() {
+        //defines the json object
+        response = JSON.parse(xhr.responseText);
+        //if date.now is between sunrise and sunset (daytime) in local lat, long assign day as 'day' else 'night'
+        day = Date.now()/1000 > response.sys.sunrise && Date.now()/1000 < response.sys.sunset ? 'day' : 'night';
+        //extracts weather id from response object and parsing it using the getWeather function below
+        weatherResult = getWeather(response.weather[0].id);
+        //Updates the info div with location, temperature and weather
+        updateInfo();
+        //Calls cloudSound function passing it with the weather result variable eg. "rain", waiting half a second
+        //to ensure asynchronous SoundCloud API runs at the right time
+        setTimeout(cloudSound(weatherResult),500);
+        //Toggle map function hides the map and shows info div, occurring after 1 second
+        setTimeout(toggleMap,1000);
+    });
     xhr.open("GET", url);
     xhr.send();
 }
