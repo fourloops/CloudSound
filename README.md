@@ -10,19 +10,18 @@ We want give the user a cathartic synergy of weather and emotion through CloudSo
 
 ## Why?
 
-We believe in the importance
-There doesn't seem to currently be anything offering this capability and it could be a useful tool for getting you in the right mood for what's going on outside.
+We believe in the power of music to put you fully in touch with your surroundings. Let us help connect you with nature.
 
 ## How?
 
-We are going to use api requests from Soundcloud, Google Maps and the Open Weather Map to "GET" data for our site
+Api requests from Soundcloud, Google Maps and the Open Weather Map are made to obtain data for CloudSound.
 
-The user will be able to specify the location they would like to get a recommended playlist for
-The first prototype will take in the users input for their city (eg. London)
-(we could also use their current location if they have their geo location switched on)
+In this first prototype:
+* The user can specify the location they want the weather for by clicking on a world map.
+* Longitude and latitude coordinates are fetched from Google Maps and fed into the Open Weather Map. 
+* This in turn generates a weatherResults variable which is matched to range of tags selected from Sound Cloud's api to compile your playlist.
 
-This will then be sent to Open Weather Map which will send back the weather id. (eg. 521 = raining)
 
-The id will be linked to a number of tags which will then be sent to Soundcloud which will send us a track based on the sent tags.
+
 ![wireframe](assets/wireframe.jpg)
 <img src="assets/wireframe1.jpg"alt="wireframe1" height=1000/>
