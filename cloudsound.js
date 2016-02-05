@@ -78,7 +78,7 @@ function stream(songObj,counter){
 
         function nextTrack(){
             if(counter < allTracks.length){
-                counter++
+                counter++;
                 changeSong();
             }
         }
