@@ -110,6 +110,12 @@ body {
     bottom: 10vh;
     left: 25%;
 }
+button.paused {
+    display:none;
+}
+button:active {
+    background-color: green;
+}
 
 .button {
     margin: 2%;
@@ -159,11 +165,11 @@ body {
             width: 100%;
         }
         #buttonDiv {
-            width: 80%;
-            left: 10%;
+            width: 90%;
+            left: 5%;
         }
         .button {
-            width: 35vw;
+            width: 25vw;
             height: 14vw
         }
         .hideButton {
