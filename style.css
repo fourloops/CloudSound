@@ -155,7 +155,17 @@ button:active {
     transition: top .7s;
 }
 
+a {
+    text-decoration: none;
+    color: #FF6A00;
+}
+a:hover {
+    text-decoration: underline;
+}
 
+#currentSong {
+    margin-top: 18%;
+}
 
 @media only screen and (max-device-width: 768px) {
         .map1 {
