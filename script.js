@@ -98,20 +98,10 @@ function getWeather(id){
 document.getElementsByClassName("hideButton")[0].addEventListener("click", toggleMap);
 //toggleMap hides and unhides the map, the info div and the innerHTML of the hide/show button
 function toggleMap(){
-    if(!hidden){
-        document.getElementsByClassName("map1")[0].classList.add("maphide");
-        document.getElementsByClassName("hideButton")[0].classList.add("hidden");
-        document.getElementsByClassName("hideButton")[0].innerHTML="SHOW MAP";
-        document.getElementsByClassName("info")[0].classList.add("infoShow");
-        hidden = true;
-    }
-    else{
-        document.getElementsByClassName("map1")[0].classList.remove("maphide");
-        document.getElementsByClassName("hideButton")[0].classList.remove("hidden");
-        document.getElementsByClassName("hideButton")[0].innerHTML="HIDE MAP";
-        document.getElementsByClassName("info")[0].classList.remove("infoShow");
-        hidden = false;
-    }
+    hidden = hidden ? false : true;
+    document.getElementsByClassName("map1")[0].classList.toggle("maphide");
+    document.getElementsByClassName("info")[0].classList.toggle("infoShow");
+    document.getElementsByClassName("hideButton")[0].innerHTML = hidden ? "SHOW MAP" : "HIDE MAP";
 }
 //updateInfo formats the info div and inputs weather info for the current location
 function updateInfo(){
