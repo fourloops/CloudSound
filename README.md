@@ -24,3 +24,5 @@ The first prototype will take in the users input for their city (eg. London)
 This will then be sent to Open Weather Map which will send back the weather id. (eg. 521 = raining)
 
 The id will be linked to a number of tags which will then be sent to Soundcloud which will send us a track based on the sent tags.
+![wireframe](assets/wireframe.jpg)
+![wireframe1](assets/wireframe1.jpg)
