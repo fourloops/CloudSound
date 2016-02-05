@@ -14,21 +14,20 @@ document.body.appendChild(googleScript);
 // ------ Creates map and adds click listener (initMap called by api script tag)
 
 function initMap() {
-
+    //creates the map centered on London with satellite view and a crosshair cursor
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
         center: {lat: 51.5072, lng: 0.1275 },
         mapTypeId: google.maps.MapTypeId.HYBRID,
         draggableCursor:'crosshair'
     });
-
+    //Adds a click function to place marker and stores latitude and longitude of marker for use in weather api
     map.addListener('click', function(e) {
         placeMarkerAndPanTo(e.latLng, map);
         currentLocation = {
             lat: '' + e.latLng.lat(),
             lng: '' + e.latLng.lng()
         };
-        console.log(e.rawOffset);
         weather();
     });
 }
@@ -50,13 +49,22 @@ function placeMarkerAndPanTo(latLng, map) {
 function weather(){
     var xhr = new XMLHttpRequest(),
         url = "http://api.openweathermap.org/data/2.5/weather?lat=" + currentLocation.lat + '&lon=' +currentLocation.lng + "&appid=" +  secretKeys.weather;
+    //
     xhr.onreadystatechange = function() {
+        //if it returns successfully...
         if(xhr.readyState == 4 && xhr.status == 200) {
+            //defines the json object
             response = JSON.parse(xhr.responseText);
+            //if date.now is between sunrise and sunset (daytime) in local lat, long assign day as 'day' else 'night'
             day = Date.now()/1000 > response.sys.sunrise && Date.now()/1000 < response.sys.sunset ? 'day' : 'night';
+            //extracts weather id from response object and parsing it using the getWeather function below
             weatherResult = getWeather(response.weather[0].id);
+            //Updates the info div with location, temperature and weather
             updateInfo();
+            //Calls cloudSound function passing it with the weather result variable eg. "rain", waiting half a second
+            //to ensure asynchronous SoundCloud API runs at the right time
             setTimeout(cloudSound(weatherResult),500);
+            //Toggle map function hides the map and shows info div, occurring after 1 second
             setTimeout(toggleMap,1000);
         }
     };
@@ -65,7 +73,8 @@ function weather(){
 }
 
 // ----- Translates returned weather ID to specific category --------
-
+//getWeather changes the background depending on the weather and whether it is day or night
+//and returns weather result as a string for cloudSound function above
 function getWeather(id){
     if(id<233 || (id<782 && id>623) || id>=956){
         document.body.style.backgroundImage = day === 'day' ? "url(assets/extremeDay.jpg)" : "url(assets/extremeNight.jpg)";
@@ -90,7 +99,7 @@ function getWeather(id){
 }
 
 document.getElementsByClassName("hideButton")[0].addEventListener("click", toggleMap);
-
+//toggleMap hides and unhides the map, the info div and the innerHTML of the hide/show button
 function toggleMap(){
     if(!hidden){
         document.getElementsByClassName("map1")[0].classList.add("maphide");
@@ -107,7 +116,7 @@ function toggleMap(){
         hidden = false;
     }
 }
-
+//updateInfo formats the info div and inputs weather info for the current location
 function updateInfo(){
     document.getElementById('area').innerHTML = response.name + ', <em>' + response.sys.country + '<em>';
     document.getElementById('temp').innerHTML = "Temperature: <b>" + (Math.floor(response.main.temp - 273.15)) + '&#8451</b>';
