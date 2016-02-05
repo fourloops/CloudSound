@@ -33,6 +33,7 @@ body {
     /*position: absolute;*/
     bottom: 0;
     right: 13%;
+    padding-left: 4%;
     font-size: 1.6em;
     font-family: sans-serif;
     -webkit-filter: opacity(1);
@@ -110,13 +111,19 @@ body {
     bottom: 10vh;
     left: 25%;
 }
+button.paused {
+    display:none;
+}
+button:active {
+    background-color: darkgrey;
+}
 
 .button {
     margin: 2%;
     font-size: 1.5em;
     background-color: white;
     height: 3em;
-    width: 5em;
+    width: 6em;
     border-radius: 10px;
     border: none;
     -webkit-filter: opacity(0.6);
@@ -159,12 +166,12 @@ body {
             width: 100%;
         }
         #buttonDiv {
-            width: 80%;
-            left: 10%;
+            width: 90%;
+            left: 5%;
         }
         .button {
-            width: 35vw;
-            height: 14vw
+            width: 25vw;
+            height: 16vw
         }
         .hideButton {
             width: 50vw;
